@@ -3,7 +3,7 @@
 Pixels::Pixels(int size, int pin){
   this->neoPixels = new Adafruit_NeoPixel(size, pin, NEO_GRB + NEO_KHZ800);
   this->pixels = new Pixel[size];
-  this->size = size;
+  this->size = size-1;
   this->setupPixels();
 }
 
@@ -13,18 +13,15 @@ void Pixels::setup(){
 }
 
 void Pixels::setupPixels(){
-  int size = this->size - 1;
-  this->pixels[size] = Pixel(60, 60, 60, -1); //60
-  this->pixels[size-1] = Pixel(255, 255, 255, -1); //255
-  this->pixels[size-2] = Pixel(60, 60, 60, 1); //60
-
-  for(int i = size - 3; i >= 0; i--){
+  for(int i = this->size; i >= 0; i--){
     this->pixels[i] = Pixel();
   }
+
+  this->pixels[0].setDirection(1);
 }
 
 void Pixels::displayPixels(){
-  for(int i = this->size-1; i >= 0; i--){
+  for(int i = this->size; i >= 0; i--){
     this->pixels[i].colorPixel(this->neoPixels, i);
   }
 
@@ -32,7 +29,7 @@ void Pixels::displayPixels(){
 }
 
 void Pixels::reset(){
-  for(int i = this->size-1; i >= 0; i--){
+  for(int i = this->size; i >= 0; i--){
     this->pixels[i].setColor(0,0,0);
     this->pixels[i].colorPixel(this->neoPixels, i);
   }

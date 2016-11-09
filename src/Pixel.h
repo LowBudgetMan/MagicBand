@@ -3,14 +3,19 @@
 
 class Pixel{
   public:
-    Pixel(int red = 0, int blue = 0, int green = 0, int direction = 1);
+    Pixel(int red = 0, int blue = 0, int green = 0);
 
     void colorPixel(Adafruit_NeoPixel* neopixel, int location);
     void setColor(int red, int green, int blue);
+    void setDirection(int direction);
+    void animate();
 
   private:
-    int red;
-    int green;
-    int blue;
-    int direction;
+    bool areLedsAtMax();
+    bool areLedsAtMin();
+
+    int red = 0;
+    int green = 0;
+    int blue = 0;
+    int direction = 0;
 };
