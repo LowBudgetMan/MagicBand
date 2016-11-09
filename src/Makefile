@@ -2,6 +2,7 @@ INCLUDE=-I $(LIBDIR)
 LIBS=-L ~/lib -lm -larduino -lNeoPixel
 CFLAGS=$(MCU) $(CPU_SPEED) -Os -w -Wl,--gc-sections -ffunction-sections -fdata-sections
 PORT=/dev/ttyUSB0
+OBJECTS= Pixel.o Pixels.o
 
 default: build upload
 
@@ -10,8 +11,7 @@ build: clean Magic.hex
 Magic.hex: Magic.elf
 	avr-objcopy -O ihex $< $@
 
-OBJECTS= Pixel.o Pixels.o blink.o
-Magic.elf: main.cpp $(OBJECTS)
+Magic.elf: $(OBJECTS) main.cpp
 	$(CXX) $(CFLAGS) $(INCLUDE) $^ -o $@ $(LIBS)
 
 upload:

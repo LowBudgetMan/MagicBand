@@ -5,6 +5,7 @@
 Pixels* pixels = new Pixels(12, 12);
 
 void setup() {
+	pinMode(3, INPUT);
 	pixels->setup();
 }
 
