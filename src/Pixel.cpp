@@ -35,10 +35,14 @@ void Pixel::animate(){
     this->green -= 1;
     this->blue -= 1;
   }
-  else if(this->direction == -1 && areLedsAtMin()){
-    this->direction = 1;
+  if(this->direction == 1 && (this->red == 170 || this->green == 170 || this->blue == 170)){
+    this->next->setDirection(1);
   }
 
+}
+
+void Pixel::setNextPixel(Pixel* next){
+  this->next = next;
 }
 
 bool Pixel::areLedsAtMax(){

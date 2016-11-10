@@ -11,5 +11,5 @@ void setup() {
 
 void loop() {
 	pixels->displayPixels();
-	delay(10);
+	// delay(10);
 }

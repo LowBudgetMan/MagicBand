@@ -13,10 +13,13 @@ void Pixels::setup(){
 }
 
 void Pixels::setupPixels(){
-  for(int i = this->size; i >= 0; i--){
+  for(int i = 0; i <= this->size; i++){
     this->pixels[i] = Pixel();
+    if(i != 0){
+      this->pixels[i].setNextPixel(&this->pixels[i-1]);
+    }
   }
-
+  this->pixels[0].setNextPixel(&this->pixels[this->size]);
   this->pixels[0].setDirection(1);
 }
 
