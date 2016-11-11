@@ -24,11 +24,15 @@ void Pixels::setupPixels(){
 }
 
 void Pixels::displayPixels(){
-  for(int i = this->size; i >= 0; i--){
-    this->pixels[i].colorPixel(this->neoPixels, i);
-  }
+  unsigned long currentTime = millis();
+  if(currentTime - this->previousTime >= this->delay){
+    for(int i = this->size; i >= 0; i--){
+      this->pixels[i].colorPixel(this->neoPixels, i);
+    }
 
-  this->neoPixels->show();
+    this->neoPixels->show();
+    this->previousTime = currentTime;
+  }
 }
 
 void Pixels::reset(){
@@ -37,4 +41,14 @@ void Pixels::reset(){
     this->pixels[i].colorPixel(this->neoPixels, i);
   }
   this->neoPixels->show();
+}
+
+void Pixels::setIncrementAmount(int increment){
+  for(int i = 0; i <= this->size; i++){
+    this->pixels[i].setIncrementAmount(increment);
+  }
+}
+
+void Pixels::setDelay(long delay){
+  this->delay = delay;
 }

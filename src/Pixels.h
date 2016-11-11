@@ -9,6 +9,8 @@ class Pixels {
     void displayPixels();
     void setup();
     void reset();
+    void setIncrementAmount(int increment);
+    void setDelay(long delay);
 
   private:
     void setupPixels();
@@ -16,4 +18,6 @@ class Pixels {
     Pixel* pixels;
     Adafruit_NeoPixel* neoPixels;
     int size;
+    unsigned long previousTime = 0;
+    long delay = 100;
 };

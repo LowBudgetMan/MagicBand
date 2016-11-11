@@ -10,6 +10,7 @@ class Pixel{
     void setDirection(int direction);
     void animate();
     void setNextPixel(Pixel* next);
+    void setIncrementAmount(int increment);
 
   private:
     bool areLedsAtMax();
@@ -20,4 +21,5 @@ class Pixel{
     int green = 0;
     int blue = 0;
     int direction = 0;
+    int increment = 1;
 };
