@@ -1,8 +1,8 @@
 INCLUDE=-I $(LIBDIR)
-LIBS=-L ~/lib -lm -larduino -lNeoPixel -lMFRC522
+LIBS=-L ~/lib -lm -larduino -lNeoPixel -lSPI -lMFRC522
 CFLAGS=$(MCU) $(CPU_SPEED) -Os -w -Wl,--gc-sections -ffunction-sections -fdata-sections
 PORT=/dev/ttyUSB0
-OBJECTS= Pixel.o Pixels.o
+OBJECTS= Pixel.o Pixels.o Reader.o
 
 default: build upload
 

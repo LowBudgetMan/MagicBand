@@ -8,6 +8,7 @@ Pixels::Pixels(int size, int pin){
 }
 
 void Pixels::setup(){
+  pinMode(3, INPUT);
   this->neoPixels->begin();
   this->neoPixels->show();
 }
