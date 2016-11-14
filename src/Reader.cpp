@@ -9,3 +9,23 @@ void Reader::setup(){
   SPI.begin();
   this->reader->PCD_Init();
 }
+
+void Reader::scanForCards(String uid){
+  this->reader->PCD_DumpVersionToSerial();
+  // Look for new cards
+  if (!this->reader->PICC_IsNewCardPresent()){
+    return;
+  }
+
+  // Select one of the cards
+  if (!this->reader->PICC_ReadCardSerial()){
+    return;
+  }
+
+  for (byte i = 0; i < this->reader->uid.size; i++){
+    if(this->reader->uid.uidByte[i] < 0x10)
+      uid += "0";
+    uid += String(this->reader->uid.uidByte[i], HEX);
+  }
+  this->reader->PICC_HaltA();
+}
