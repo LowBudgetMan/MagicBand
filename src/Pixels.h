@@ -6,7 +6,7 @@ class Pixels {
   public:
     Pixels(int size, int pin);
 
-    void displayPixels();
+    void displayPixels(long currentTime);
     void setup();
     void reset();
     void setIncrementAmount(int increment);

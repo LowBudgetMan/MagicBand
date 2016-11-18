@@ -24,13 +24,11 @@ void Pixels::setupPixels(){
   this->pixels[0].setDirection(1);
 }
 
-void Pixels::displayPixels(){
-  unsigned long currentTime = millis();
+void Pixels::displayPixels(long currentTime){
   if(currentTime - this->previousTime >= this->delay){
     for(int i = this->size; i >= 0; i--){
       this->pixels[i].colorPixel(this->neoPixels, i);
     }
-
     this->neoPixels->show();
     this->previousTime = currentTime;
   }

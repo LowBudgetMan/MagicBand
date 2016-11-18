@@ -11,7 +11,6 @@ void Reader::setup(){
 }
 
 void Reader::scanForCards(String uid){
-  this->reader->PCD_DumpVersionToSerial();
   // Look for new cards
   if (!this->reader->PICC_IsNewCardPresent()){
     return;
@@ -28,4 +27,6 @@ void Reader::scanForCards(String uid){
     uid += String(this->reader->uid.uidByte[i], HEX);
   }
   this->reader->PICC_HaltA();
+  // Serial.println(uid);
+  // uid = "";
 }

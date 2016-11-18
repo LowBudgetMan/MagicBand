@@ -31,7 +31,7 @@ void Pixel::animate(){
       this->direction = -1;
     }
   }
-  
+
   else if(this->direction == -1){
     this->red -= this->increment;
     this->green -= this->increment;
