@@ -1,18 +1,10 @@
 #include <Arduino.h>
-#include <NeoPixel.h>
-#include "Pixels.h"
-#include "Reader.h"
+#include "FiniteStateMachine.h"
 
-Pixels* pixels = new Pixels(12, 8);
-Reader* reader = new Reader(10, 9);
-String uid = String("");
+FiniteStateMachine* fsm = new FiniteStateMachine(12,8,10,9);
 
 void setup() {
-	pixels->setup();
-	pixels->setIncrementAmount(10);
-	pixels->setDelay(10);
-
-	reader->setup();
+	fsm->setup();
 
 	//Sets up timer0
 	OCR0A = 0xAF;
@@ -20,13 +12,9 @@ void setup() {
 }
 
 void loop() {
-	reader->scanForCards(uid);
-	if(uid != ""){
-		Serial.println(uid);
-		uid = "";
-	}
+	fsm->stateSwitch();
 }
 
 SIGNAL(TIMER0_COMPA_vect) {
-	pixels->displayPixels(millis());
+	fsm->displayPixels();
 }
