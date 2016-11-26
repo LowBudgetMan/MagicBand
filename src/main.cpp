@@ -21,6 +21,10 @@ void setup() {
 
 void loop() {
 	reader->scanForCards(uid);
+	if(uid != ""){
+		Serial.println(uid);
+		uid = "";
+	}
 }
 
 SIGNAL(TIMER0_COMPA_vect) {
