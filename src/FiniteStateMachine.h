@@ -13,6 +13,8 @@ class FiniteStateMachine{
   private:
     void idleSetup();
     void idle();
+    void checkingSetup();
+    void checking();
 
     Pixels* pixels;
     Reader* reader;

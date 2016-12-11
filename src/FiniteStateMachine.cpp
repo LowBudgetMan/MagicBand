@@ -14,11 +14,17 @@ void FiniteStateMachine::setup(){
 void FiniteStateMachine::stateSwitch(){
   switch (this->state) {
 		case 0:
-			this->idleSetup();
-	    break;
+			 this->idleSetup();
+	     break;
 	  case 1:
-			this->idle();
-	    break;
+			 this->idle();
+	     break;
+    case 2:
+        this->checkingSetup();
+        break;
+    case 3:
+        this->checking();
+        break;
 	  default:
 	    this->idleSetup();
 	  break;
@@ -40,5 +46,21 @@ void FiniteStateMachine::idle(){
 	if(this->uid != ""){
 		Serial.println(this->uid);
 		this->uid = "";
+    this->state = 2;
 	}
+}
+
+long previous = 0;
+
+void FiniteStateMachine::checkingSetup(){
+	this->pixels->setIncrementAmount(10);
+	this->pixels->setDelay(2);
+	this->state = 3;
+  previous = millis();
+}
+
+void FiniteStateMachine::checking(){
+  if(millis()-previous >= 5000){
+    this->state = 0;
+  }
 }
