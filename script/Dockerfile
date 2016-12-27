@@ -28,5 +28,4 @@ RUN apt-get install gcc-avr -y
 RUN apt-get install avr-libc -y
 
 RUN apt-get install git -y
-RUN git clone https://github.com/reuterni/MagicBand.git
-RUN cd MagicBand && make
+CMD git clone https://github.com/reuterni/MagicBand.git && cd MagicBand && make && cd .. && rm -r MagicBand
