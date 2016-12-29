@@ -29,7 +29,7 @@ void Pixels::setupPixels(){
 void Pixels::displayPixels(long currentTime){
   if(currentTime - this->previousTime >= this->delay){
     for(int i = this->size; i >= 0; i--){
-      this->pixels[i].colorPixel();
+      this->pixels[i].animateWheel();
     }
     this->neoPixels->show();
     this->previousTime = currentTime;
@@ -39,7 +39,7 @@ void Pixels::displayPixels(long currentTime){
 void Pixels::reset(){
   for(int i = this->size; i >= 0; i--){
     this->pixels[i].setColor(0,0,0);
-    this->pixels[i].colorPixel();
+    this->pixels[i].animateWheel();
   }
   this->neoPixels->show();
 }

@@ -6,13 +6,11 @@ Pixel::Pixel(int red, int green, int blue){
   this->blue = blue;
 }
 
-void Pixel::colorPixel(){
-  animate();
+void Pixel::updateNeoPixel(){
   this->neoPixel->setPixelColor(this->location, this->neoPixel->Color(this->red,this->green,this->blue));
 }
 
-
-void Pixel::animate(){
+void Pixel::animateWheel(){
   if(this->direction == 1){
     this->red += this->increment;
     this->green += this->increment;
@@ -36,6 +34,8 @@ void Pixel::animate(){
   if(this->direction == 1 && (this->red == 170 || this->green == 170 || this->blue == 170)){
     this->next->setDirection(1);
   }
+
+  updateNeoPixel();
 }
 
 bool Pixel::areLedsAtMax(){
