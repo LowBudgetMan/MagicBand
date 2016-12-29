@@ -6,20 +6,11 @@ Pixel::Pixel(int red, int green, int blue){
   this->blue = blue;
 }
 
-void Pixel::colorPixel(Adafruit_NeoPixel* neoPixel, int location){
+void Pixel::colorPixel(){
   animate();
-  neoPixel->setPixelColor(location, neoPixel->Color(this->red,this->green,this->blue));
+  this->neoPixel->setPixelColor(this->location, this->neoPixel->Color(this->red,this->green,this->blue));
 }
 
-void Pixel::setColor(int red, int green, int blue){
-  this->red = red;
-  this->green = green;
-  this->blue = blue;
-}
-
-void Pixel::setDirection(int direction){
-  this->direction = direction;
-}
 
 void Pixel::animate(){
   if(this->direction == 1){
@@ -45,14 +36,6 @@ void Pixel::animate(){
   if(this->direction == 1 && (this->red == 170 || this->green == 170 || this->blue == 170)){
     this->next->setDirection(1);
   }
-}
-
-void Pixel::setNextPixel(Pixel* next){
-  this->next = next;
-}
-
-void Pixel::setIncrementAmount(int increment){
-  this->increment = increment;
 }
 
 bool Pixel::areLedsAtMax(){
@@ -87,4 +70,30 @@ bool Pixel::areLedsAtMin(){
     atMin = true;
   }
   return atMin;
+}
+
+void Pixel::setNextPixel(Pixel* next){
+  this->next = next;
+}
+
+void Pixel::setIncrementAmount(int increment){
+  this->increment = increment;
+}
+
+void Pixel::setLocation(int location){
+  this->location = location;
+}
+
+void Pixel::setNeoPixel(Adafruit_NeoPixel* neoPixel){
+  this->neoPixel = neoPixel;
+}
+
+void Pixel::setColor(int red, int green, int blue){
+  this->red = red;
+  this->green = green;
+  this->blue = blue;
+}
+
+void Pixel::setDirection(int direction){
+  this->direction = direction;
 }

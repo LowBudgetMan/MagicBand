@@ -16,6 +16,8 @@ void Pixels::setup(){
 void Pixels::setupPixels(){
   for(int i = 0; i <= this->size; i++){
     this->pixels[i] = Pixel();
+    this->pixels[i].setLocation(i);
+    this->pixels[i].setNeoPixel(this->neoPixels);
     if(i != 0){
       this->pixels[i].setNextPixel(&this->pixels[i-1]);
     }
@@ -27,7 +29,7 @@ void Pixels::setupPixels(){
 void Pixels::displayPixels(long currentTime){
   if(currentTime - this->previousTime >= this->delay){
     for(int i = this->size; i >= 0; i--){
-      this->pixels[i].colorPixel(this->neoPixels, i);
+      this->pixels[i].colorPixel();
     }
     this->neoPixels->show();
     this->previousTime = currentTime;
@@ -37,7 +39,7 @@ void Pixels::displayPixels(long currentTime){
 void Pixels::reset(){
   for(int i = this->size; i >= 0; i--){
     this->pixels[i].setColor(0,0,0);
-    this->pixels[i].colorPixel(this->neoPixels, i);
+    this->pixels[i].colorPixel();
   }
   this->neoPixels->show();
 }

@@ -5,18 +5,22 @@ class Pixel{
   public:
     Pixel(int red = 0, int blue = 0, int green = 0);
 
-    void colorPixel(Adafruit_NeoPixel* neopixel, int location);
+    void colorPixel();
+    void animate();
     void setColor(int red, int green, int blue);
     void setDirection(int direction);
-    void animate();
     void setNextPixel(Pixel* next);
     void setIncrementAmount(int increment);
+    void setLocation(int location);
+    void setNeoPixel(Adafruit_NeoPixel* neoPixel);
     bool areLedsAtMax();
     bool areLedsAtMin();
 
   private:
 
     Pixel* next = NULL;
+    Adafruit_NeoPixel* neoPixel;
+    int location;
     int red = 0;
     int green = 0;
     int blue = 0;
