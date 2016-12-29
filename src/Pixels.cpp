@@ -53,3 +53,17 @@ void Pixels::setIncrementAmount(int increment){
 void Pixels::setDelay(long delay){
   this->delay = delay;
 }
+
+void Pixels::setColor(int red, int green, int blue){
+  for(int i = 0; i <= this->size; i++){
+    this->pixels[i].setColor(red, green, blue);
+  }
+  this->neoPixels->show();
+}
+
+bool Pixels::fadeIn(long currentTime){
+  if(currentTime - this->previousTime >= this->delay){
+    this->previousTime = currentTime;
+  }
+  return false;
+}

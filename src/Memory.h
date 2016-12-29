@@ -8,6 +8,6 @@ class Memory{
     void clear();
 
   private:
-    String memory[100];
-    int location = 0;
+    String memory[100] = {};
+    int location = -1;
 };

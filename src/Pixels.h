@@ -7,10 +7,12 @@ class Pixels {
     Pixels(int size, int pin);
 
     void displayPixels(long currentTime);
+    bool fadeIn(long currentTime);
     void setup();
     void reset();
     void setIncrementAmount(int increment);
     void setDelay(long delay);
+    void setColor(int red, int green, int blue);
 
   private:
     void setupPixels();
