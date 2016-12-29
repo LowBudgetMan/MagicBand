@@ -56,6 +56,7 @@ void FiniteStateMachine::idleSetup(){
   this->pixels->setColor(0,0,0);
 	this->pixels->setIncrementAmount(10);
 	this->pixels->setDelay(10);
+  this->uid = "";
 	this->state = 1;
 }
 
@@ -63,7 +64,6 @@ void FiniteStateMachine::idle(){
 	this->reader->scanForCards(this->uid);
 	if(this->uid != ""){
 		Serial.println(this->uid);
-		this->uid = "";
     this->state = 2;
 	}
 }
@@ -100,8 +100,7 @@ void FiniteStateMachine::badIdSetup(){
   this->pixels->setIncrementAmount(10);
 	this->pixels->setDelay(5);
   this->pixels->setColor(1,0,0);
-  this->memory->put(this->uid);
-  this->state = 0;
+  this->state = 6;
 }
 
 void FiniteStateMachine::fadeIn(){
