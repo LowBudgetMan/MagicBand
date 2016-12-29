@@ -56,21 +56,35 @@ void Pixel::setIncrementAmount(int increment){
 }
 
 bool Pixel::areLedsAtMax(){
-  if(this->red >= 255 || this->green >= 255|| this->blue >= 255){
+  bool atMax = false;
+  if(this->red >= 255){
     this->red = 255;
-    this->green = 255;
-    this->blue = 255;
-    return true;
+    atMax = true;
   }
-  return false;
+  if(this->green >= 255){
+    this->green = 255;
+    atMax = true;
+  }
+  if(this->blue >= 255){
+    this->blue = 255;
+    atMax = true;
+  }
+  return atMax;
 }
 
 bool Pixel::areLedsAtMin(){
-  if(this->red <= 0 || this->green <= 0|| this->blue <= 0){
+  bool atMin = false;
+  if(this->red <= 0){
     this->red = 0;
-    this->green = 0;
-    this->blue = 0;
-    return true;
+    atMin = true;
   }
-  return false;
+  if(this->green <= 0){
+    this->green = 0;
+    atMin = true;
+  }
+  if(this->blue <= 0){
+    this->blue = 0;
+    atMin = true;
+  }
+  return atMin;
 }

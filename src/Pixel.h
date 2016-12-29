@@ -11,10 +11,10 @@ class Pixel{
     void animate();
     void setNextPixel(Pixel* next);
     void setIncrementAmount(int increment);
-
-  private:
     bool areLedsAtMax();
     bool areLedsAtMin();
+
+  private:
 
     Pixel* next = NULL;
     int red = 0;
