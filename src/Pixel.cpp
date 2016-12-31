@@ -38,6 +38,19 @@ void Pixel::animateWheel(){
   updateNeoPixel();
 }
 
+void Pixel::animateFadeIn(){
+  if(this->red > 0 && this->red < 255){
+    this->red += this->increment;
+  }
+  if(this->green > 0 && this->green < 255){
+    this->green += this->increment;
+  }
+  if(this->blue > 0 && this->blue < 255){
+    this->blue += this->increment;
+  }
+  updateNeoPixel();
+}
+
 bool Pixel::areLedsAtMax(){
   bool atMax = false;
   if(this->red >= 255){

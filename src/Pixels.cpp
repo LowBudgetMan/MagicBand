@@ -64,6 +64,19 @@ void Pixels::setColor(int red, int green, int blue){
 bool Pixels::fadeIn(long currentTime){
   if(currentTime - this->previousTime >= this->delay){
     this->previousTime = currentTime;
+
+    bool allOn = true;
+    for(int i = 0; i <= this->size; i++){
+      if(!this->pixels[i].areLedsAtMax()){
+        this->pixels[i].animateFadeIn();
+        allOn = false;
+      }
+    }
+    this->neoPixels->show();
+
+    if(allOn){
+      return true;
+    }
   }
   return false;
 }

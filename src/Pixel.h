@@ -6,6 +6,7 @@ class Pixel{
     Pixel(int red = 0, int blue = 0, int green = 0);
 
     void animateWheel();
+    void animateFadeIn();
 
     bool areLedsAtMax();
     bool areLedsAtMin();

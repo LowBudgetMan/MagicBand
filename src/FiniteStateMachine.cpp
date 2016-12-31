@@ -90,14 +90,14 @@ void FiniteStateMachine::checking(){
 }
 
 void FiniteStateMachine::goodIdSetup(){
-  this->pixels->setIncrementAmount(10);
+  this->pixels->setIncrementAmount(1);
   this->pixels->setDelay(5);
   this->pixels->setColor(0,1,0);
   this->state = 6;
 }
 
 void FiniteStateMachine::badIdSetup(){
-  this->pixels->setIncrementAmount(10);
+  this->pixels->setIncrementAmount(1);
 	this->pixels->setDelay(5);
   this->pixels->setColor(1,0,0);
   this->state = 6;
