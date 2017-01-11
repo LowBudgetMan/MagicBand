@@ -7,6 +7,7 @@ class Pixel{
 
     void animateWheel();
     void animateFadeIn();
+    void animateSpinOut();
 
     bool areLedsAtMax();
     bool areLedsAtMin();

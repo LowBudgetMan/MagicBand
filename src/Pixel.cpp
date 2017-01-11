@@ -51,6 +51,26 @@ void Pixel::animateFadeIn(){
   updateNeoPixel();
 }
 
+void Pixel::animateSpinOut(){
+  if(this->direction == -1){
+    if(this->red > 0 && this->red <= 255){
+      this->red -= this->increment;
+    }
+    if(this->green > 0 && this->green <= 255){
+      this->green -= this->increment;
+    }
+    if(this->blue > 0 && this->blue <= 255){
+      this->blue -= this->increment;
+    }
+  }
+
+  if(this->direction == -1 && (this->red <= 200 && this->green <= 200 && this->blue <= 200)){
+    this->next->setDirection(-1);
+  }
+
+  updateNeoPixel();
+}
+
 bool Pixel::areLedsAtMax(){
   bool atMax = false;
   if(this->red >= 255){
@@ -69,20 +89,24 @@ bool Pixel::areLedsAtMax(){
 }
 
 bool Pixel::areLedsAtMin(){
-  bool atMin = false;
+  bool redMin = false;
+  bool greenMin = false;
+  bool blueMin = false;
+
   if(this->red <= 0){
     this->red = 0;
-    atMin = true;
+    redMin = true;
   }
   if(this->green <= 0){
     this->green = 0;
-    atMin = true;
+    greenMin = true;
   }
   if(this->blue <= 0){
     this->blue = 0;
-    atMin = true;
+    blueMin = true;
   }
-  return atMin;
+
+  return (redMin && greenMin && blueMin);
 }
 
 void Pixel::setNextPixel(Pixel* next){

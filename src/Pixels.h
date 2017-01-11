@@ -8,6 +8,9 @@ class Pixels {
 
     void displayPixels(long currentTime);
     bool fadeIn(long currentTime);
+    bool spinOut(long currentTime);
+    void setFirstPixelDirection(int state);
+    void resetPixelState();
     void setup();
     void reset();
     void setIncrementAmount(int increment);

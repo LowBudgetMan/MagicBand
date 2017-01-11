@@ -19,6 +19,8 @@ class FiniteStateMachine{
     void goodIdSetup();
     void badIdSetup();
     void fadeIn();
+    void spinOutSetup();
+    void spinOut();
 
     Pixels* pixels;
     Reader* reader;

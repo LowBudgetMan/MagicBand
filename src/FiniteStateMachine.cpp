@@ -35,6 +35,12 @@ void FiniteStateMachine::stateSwitch(){
     case 6:
       this->fadeIn();
       break;
+    case 7:
+      this->spinOutSetup();
+      break;
+    case 8:
+      this->spinOut();
+      break;
 	  default:
 	    this->idleSetup();
 	  break;
@@ -44,6 +50,11 @@ void FiniteStateMachine::stateSwitch(){
 void FiniteStateMachine::displayPixels(){
   if(this->state >= 4 && this->state <= 6){
     if(this->pixels->fadeIn(millis())){
+        this->state = 7;
+    }
+  }
+  else if(this->state >= 7 && this->state <= 8){
+    if(this->pixels->spinOut(millis())){
         this->state = 0;
     }
   }
@@ -56,6 +67,8 @@ void FiniteStateMachine::idleSetup(){
   this->pixels->setColor(0,0,0);
 	this->pixels->setIncrementAmount(10);
 	this->pixels->setDelay(10);
+  this->pixels->resetPixelState();
+  this->pixels->setFirstPixelDirection(1);
   this->uid = "";
 	this->state = 1;
 }
@@ -104,4 +117,15 @@ void FiniteStateMachine::badIdSetup(){
 }
 
 void FiniteStateMachine::fadeIn(){
+}
+
+void FiniteStateMachine::spinOutSetup(){
+  this->pixels->setIncrementAmount(1);
+  this->pixels->setDelay(2);
+  this->pixels->resetPixelState();
+  this->pixels->setFirstPixelDirection(-1);
+  this->state = 8;
+}
+
+void FiniteStateMachine::spinOut(){
 }

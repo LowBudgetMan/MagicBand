@@ -80,3 +80,33 @@ bool Pixels::fadeIn(long currentTime){
   }
   return false;
 }
+
+void Pixels::setFirstPixelDirection(int state){
+  this->pixels[0].setDirection(state);
+}
+
+void Pixels::resetPixelState(){
+  for(int i = 0; i <= this->size; i++){
+    this->pixels[i].setDirection(0);
+  }
+}
+
+bool Pixels::spinOut(long currentTime){
+  if(currentTime - this->previousTime >= this->delay){
+    this->previousTime = currentTime;
+
+    bool allOff = true;
+    for(int i = 0; i <= this->size; i++){
+      if(!this->pixels[i].areLedsAtMin()){
+        this->pixels[i].animateSpinOut();
+        allOff = false;
+      }
+    }
+    this->neoPixels->show();
+
+    if(allOff){
+      return true;
+    }
+  }
+  return false;
+}
