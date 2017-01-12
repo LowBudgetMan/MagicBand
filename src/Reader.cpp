@@ -8,6 +8,7 @@ void Reader::setup(){
   Serial.begin(9600);
   SPI.begin();
   this->reader->PCD_Init();
+  // this->reader->PCD_SetRegisterBitMask(this->reader->RFCfgReg, (0x07<<4));
 }
 
 void Reader::scanForCards(String& uid){

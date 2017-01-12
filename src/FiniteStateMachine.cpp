@@ -8,6 +8,9 @@ FiniteStateMachine::FiniteStateMachine(int pixNum, int pixPin, int sdaPin, int r
 }
 
 void FiniteStateMachine::setup(){
+  pinMode(2, INPUT);
+  pinMode(3, INPUT);
+
   this->pixels->setup();
 	this->reader->setup();
 }
