@@ -1,10 +1,12 @@
 #include "FiniteStateMachine.h"
 
-FiniteStateMachine::FiniteStateMachine(int pixNum, int pixPin, int sdaPin, int rstPin){
+FiniteStateMachine::FiniteStateMachine(int pixNum, int pixPin, int sdaPin, int rstPin, int clearPin, int addPin){
   this->pixels = new Pixels(pixNum, pixPin);
   this->reader = new Reader(sdaPin, rstPin);
   this->memory = new Memory();
   this->uid = String("");
+  this->addPin = 2;
+  this->clearPin = 3;
 }
 
 void FiniteStateMachine::setup(){
@@ -44,6 +46,18 @@ void FiniteStateMachine::stateSwitch(){
     case 8:
       this->spinOut();
       break;
+    case 9:
+      this->addIdle();
+      break;
+    case 10:
+      this->addId();
+      break;
+    case 11:
+      this->addedIdSetup();
+      break;
+    case 12:
+      this->removeId();
+      break;
 	  default:
 	    this->idleSetup();
 	  break;
@@ -78,9 +92,21 @@ void FiniteStateMachine::idleSetup(){
 
 void FiniteStateMachine::idle(){
 	this->reader->scanForCards(this->uid);
+
+  if(digitalRead(this->addPin) == LOW){
+    this->state = 9;
+    return;
+  }
+
+  if(digitalRead(this->clearPin) == LOW){
+    this->state = 12;
+    return;
+  }
+
 	if(this->uid != ""){
 		Serial.println(this->uid);
     this->state = 2;
+    return;
 	}
 }
 
@@ -131,4 +157,16 @@ void FiniteStateMachine::spinOutSetup(){
 }
 
 void FiniteStateMachine::spinOut(){
+}
+
+void FiniteStateMachine::addIdle(){
+}
+
+void FiniteStateMachine::addId(){
+}
+
+void FiniteStateMachine::addedIdSetup(){
+}
+
+void FiniteStateMachine::removeId(){
 }

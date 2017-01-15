@@ -6,7 +6,7 @@
 
 class FiniteStateMachine{
   public:
-    FiniteStateMachine(int pixNum, int pixPin, int sdaPin, int rstPin);
+    FiniteStateMachine(int pixNum, int pixPin, int sdaPin, int rstPin, int clearPin, int addPin);
     void setup();
     void stateSwitch();
     void displayPixels();
@@ -21,10 +21,16 @@ class FiniteStateMachine{
     void fadeIn();
     void spinOutSetup();
     void spinOut();
+    void addIdle();
+    void addId();
+    void addedIdSetup();
+    void removeId();
 
     Pixels* pixels;
     Reader* reader;
     Memory* memory;
     String uid;
     int state = 0;
+    int clearPin;
+    int addPin;
 };

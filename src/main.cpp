@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include "FiniteStateMachine.h"
 
-FiniteStateMachine* fsm = new FiniteStateMachine(12,8,10,9);
+FiniteStateMachine* fsm = new FiniteStateMachine(12,8,10,9,3,2);
 
 void setup() {
 	fsm->setup();
