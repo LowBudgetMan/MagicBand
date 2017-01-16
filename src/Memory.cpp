@@ -25,8 +25,6 @@ bool Memory::check(String uid){
 }
 
 void Memory::clear(){
-  String copy[100] = {};
-  memcpy( this->memory, copy, 1);
-  delete copy;
+  memset(this->memory, 0, sizeof(this->memory));
   this->location = -1;
 }

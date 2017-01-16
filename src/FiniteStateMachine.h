@@ -22,6 +22,7 @@ class FiniteStateMachine{
     void spinOutSetup();
     void spinOut();
     void addIdle();
+    void addIdSetup();
     void addId();
     void addedIdSetup();
     void removeId();

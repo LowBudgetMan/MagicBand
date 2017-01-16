@@ -5,13 +5,13 @@ FiniteStateMachine::FiniteStateMachine(int pixNum, int pixPin, int sdaPin, int r
   this->reader = new Reader(sdaPin, rstPin);
   this->memory = new Memory();
   this->uid = String("");
-  this->addPin = 2;
-  this->clearPin = 3;
+  this->addPin = addPin;
+  this->clearPin = clearPin;
 }
 
 void FiniteStateMachine::setup(){
-  pinMode(2, INPUT);
-  pinMode(3, INPUT);
+  pinMode(this->addPin, INPUT);
+  pinMode(this->clearPin, INPUT);
 
   this->pixels->setup();
 	this->reader->setup();
@@ -50,12 +50,15 @@ void FiniteStateMachine::stateSwitch(){
       this->addIdle();
       break;
     case 10:
-      this->addId();
+      this->addIdSetup();
       break;
     case 11:
-      this->addedIdSetup();
+      this->addId();
       break;
     case 12:
+      this->addedIdSetup();
+      break;
+    case 13:
       this->removeId();
       break;
 	  default:
@@ -99,7 +102,7 @@ void FiniteStateMachine::idle(){
   }
 
   if(digitalRead(this->clearPin) == LOW){
-    this->state = 12;
+    this->state = 13;
     return;
   }
 
@@ -134,6 +137,7 @@ void FiniteStateMachine::checking(){
 void FiniteStateMachine::goodIdSetup(){
   this->pixels->setIncrementAmount(1);
   this->pixels->setDelay(5);
+  this->pixels->resetPixelState();
   this->pixels->setColor(0,1,0);
   this->state = 6;
 }
@@ -141,6 +145,7 @@ void FiniteStateMachine::goodIdSetup(){
 void FiniteStateMachine::badIdSetup(){
   this->pixels->setIncrementAmount(1);
 	this->pixels->setDelay(5);
+  this->pixels->resetPixelState();
   this->pixels->setColor(1,0,0);
   this->state = 6;
 }
@@ -160,13 +165,41 @@ void FiniteStateMachine::spinOut(){
 }
 
 void FiniteStateMachine::addIdle(){
+  this->reader->scanForCards(this->uid);
+
+  if(this->uid != ""){
+		Serial.println(this->uid);
+    this->state = 10;
+    return;
+	}
+
+  if(millis()-previous >= 10000){
+    this->state = 0;
+  }
+}
+
+void FiniteStateMachine::addIdSetup(){
+  this->pixels->setIncrementAmount(10);
+	this->pixels->setDelay(2);
+	this->state = 11;
+  previous = millis();
 }
 
 void FiniteStateMachine::addId(){
+  this->memory->put(this->uid);
+  this->state = 12;
 }
 
 void FiniteStateMachine::addedIdSetup(){
+  this->pixels->setIncrementAmount(1);
+	this->pixels->setDelay(5);
+  this->pixels->resetPixelState();
+  this->pixels->setColor(0,0,1);
+  this->state = 6;
 }
 
 void FiniteStateMachine::removeId(){
+  this->memory->clear();
+  Serial.println("Cleared");
+  this->state = 1;
 }
