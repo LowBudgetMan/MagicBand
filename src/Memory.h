@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <EEPROM.h>
 
 class Memory{
   public:
@@ -10,4 +11,5 @@ class Memory{
   private:
     String memory[100] = {};
     int location = -1;
+    int size = 68; //EEPROM can hold 68 IDs with NANO chip
 };

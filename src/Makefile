@@ -1,5 +1,5 @@
 INCLUDE=-I $(LIBDIR)
-LIBS=-L ~/lib -lm -larduino -lNeoPixel -lSPI -lMFRC522
+LIBS=-L ~/lib -lm -larduino -lNeoPixel -lSPI -lMFRC522 -lEEPROM
 CFLAGS=$(MCU) $(CPU_SPEED) -Os -w -Wl,--gc-sections -ffunction-sections -fdata-sections
 PORT=/dev/ttyUSB0
 OBJECTS= Memory.o Pixel.o Pixels.o Reader.o FiniteStateMachine.o

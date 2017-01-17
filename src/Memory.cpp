@@ -4,7 +4,7 @@ Memory::Memory(){
 }
 
 void Memory::put(String uid){
-  if(this->location <= 98){
+  if(this->location < this->size - 1){
     this->location += 1;
     this->memory[this->location] = uid;
   }
